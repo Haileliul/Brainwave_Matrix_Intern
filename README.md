@@ -4,7 +4,7 @@ This repository contains projects completed as part of the Brainwave Matrix Inte
 
 | Project Name | Description                          | Technologies Used       | Link                                                                 |
 |--------------|--------------------------------------|-------------------------|----------------------------------------------------------------------|
-| `todo`       | A simple to-do application to manage tasks effectively. | React, CSS, JavaScript | [View Project](./todo)                                               |
+| `todo`       | A simple to-do application to manage tasks effectively. | Flutter, Firebase   | [View Project](./todo)                                               |
 | `zeina`      | A news application that provides the latest updates on various topics. | Flutter, Firebase       | [View Project](./zeina)                                              |
 
 ## Getting Started
