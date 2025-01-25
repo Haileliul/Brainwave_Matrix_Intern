@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'features/home/presentation/home_screen.dart';
 import 'features/home/presentation/detailed_page.dart';
+import 'core/utils/theme.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -8,10 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: lightTheme,
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),

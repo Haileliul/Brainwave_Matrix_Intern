@@ -30,6 +30,8 @@ class NewsCard extends StatelessWidget {
       child: SizedBox(
         width: size.width * 0.4,
         child: Card(
+          color: Theme.of(context).cardColor,
+          elevation: 5,
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [
@@ -37,6 +39,7 @@ class NewsCard extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(
                       height: size.height * 0.1,
@@ -56,8 +59,11 @@ class NewsCard extends StatelessWidget {
                           vertical: 4.0, horizontal: 8.0),
                       child: Text(
                         title,
-                        style: const TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).colorScheme.onSecondary,
+                        ),
                       ),
                     ),
                     Padding(
@@ -105,7 +111,7 @@ class NewsCard extends StatelessWidget {
                 height: 20,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.primary,
                   borderRadius: BorderRadius.vertical(
                     bottom: Radius.circular(10),
                   ),
@@ -114,7 +120,10 @@ class NewsCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4.0),
                   child: Text(
                     date,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
               )

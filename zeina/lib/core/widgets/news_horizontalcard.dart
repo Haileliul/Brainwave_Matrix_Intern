@@ -66,14 +66,17 @@ class news_hrizontalcard extends StatelessWidget {
                     width: 80,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.primary,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
                       ),
                     ),
-                    child: Text(
-                      date,
-                      textAlign: TextAlign.end,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2.0),
+                      child: Text(
+                        date,
+                        textAlign: TextAlign.end,
+                      ),
                     ),
                   )
                 ],
@@ -96,6 +99,7 @@ class news_hrizontalcard extends StatelessWidget {
                           title,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.onSecondary,
                           ),
                         ),
                         Padding(

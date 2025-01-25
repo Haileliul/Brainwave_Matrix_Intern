@@ -18,7 +18,7 @@ class DetailedPage extends StatelessWidget {
     final String date = arguments['date'];
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Detailed Page'),
+        title: Text(title),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -31,38 +31,52 @@ class DetailedPage extends StatelessWidget {
           height: size.height,
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Stack(
               children: [
-                SizedBox(
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) =>
-                            CircularProgressIndicator(
-                                value: downloadProgress.progress),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                    fit: BoxFit.cover,
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      child: CachedNetworkImage(
+                        imageUrl: imageUrl,
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(bottom: 50),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
+                          ),
+                          Text(
+                            content,
+                            style: TextStyle(
+                                fontWeight: FontWeight.w100, fontSize: 15),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                      Text(
-                        content,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w100, fontSize: 15),
-                      ),
-                    ],
+                Positioned(
+                  bottom: 10,
+                  right: 10,
+                  child: Text(
+                    date,
+                    style:
+                        TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
                   ),
                 ),
               ],

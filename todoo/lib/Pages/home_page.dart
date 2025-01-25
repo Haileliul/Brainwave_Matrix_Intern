@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import '../Util/database_helper.dart';
 import '../Provider/PeriferanceProvider.dart';
+import '../Util/snacksbar.dart';
+import '../Widgets/DrawerContainer.dart';
 import '../Widgets/textfild.dart';
 import '../Widgets/button.dart';
 
@@ -85,6 +87,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 if (nameController.text.isNotEmpty &&
                     descriptionController.text.isNotEmpty) {
                   _addItem(nameController.text, descriptionController.text);
+                  showSnackbar(
+                    context,
+                    "Task has been Added",
+                    Theme.of(context).primaryColor,
+                  );
                 }
                 Navigator.of(context).pop();
               },
@@ -140,17 +147,17 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Todo App'),
-        centerTitle: true,
-        elevation: 5,
-        shape: ContinuousRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(50),
-            bottomRight: Radius.circular(50),
+        title: Text(
+          'Todo App',
+          style: TextStyle(
+            fontFamily: 'indian',
+            fontSize: 13,
           ),
         ),
+        centerTitle: true,
+        elevation: 10,
       ),
       body: ListView.builder(
         itemCount: _items.length,
@@ -164,6 +171,7 @@ class _MyHomePageState extends State<MyHomePage> {
             margin: EdgeInsets.only(bottom: 5, top: 2),
             child: ListTile(
               leading: Checkbox(
+                side: BorderSide(color: Theme.of(context).primaryColor),
                 value: isSelected, // Check if this item is selected
                 onChanged: (value) {
                   setState(() {
@@ -181,11 +189,16 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               title: Text("${item['name']}",
                   style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 15,
                       decoration: isSelected
                           ? TextDecoration.lineThrough
                           : TextDecoration.none)),
               subtitle: Text("${item['description']}",
                   style: TextStyle(
+                      fontWeight: FontWeight.w100,
+                      color: Colors.grey,
+                      fontSize: 12,
                       decoration: isSelected
                           ? TextDecoration.lineThrough
                           : TextDecoration.none)),
@@ -203,10 +216,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     icon: Icon(Icons.delete),
                     color: Theme.of(context).colorScheme.error,
                     onPressed: () => {
-                      // _deleteItem(item['id']),
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Button clicked')),
-                      ),
+                      _deleteItem(item['id']),
+                      showSnackbar(
+                        context,
+                        "Task has been delete",
+                        Theme.of(context).colorScheme.error,
+                      )
                     },
                   ),
                 ],
@@ -215,6 +230,7 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         },
       ),
+      drawer: showDrawer(size),
       floatingActionButton: FloatingActionButton(
         onPressed: _showAddDialog,
         child: Icon(Icons.add),
